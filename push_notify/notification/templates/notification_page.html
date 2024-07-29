@@ -9,6 +9,12 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
+<style>
+    .alert {
+        border-radius: 0;
+    }
+</style>
+
 <body>
     <div id="notification"></div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -76,6 +82,21 @@
         socket.addEventListener("message", (event) => {
             const messageData = JSON.parse(event.data);
             console.log("Received notification:", messageData.message);
+            showNotification(messageData.message);
+
+            function showNotification(notificationHTML) {
+                const notification = document.createElement("div");  // create a new alert div
+                notification.className = "alert alert-primary alert-dismissible fade show mb-0";
+                notification.setAttribute("role", "alert");
+                notification.innerHTML = notificationHTML;
+
+                const closeButton = document.createElement("button"); // create the close button
+                closeButton.classList.add("btn-close");
+                closeButton.setAttribute("data-bs-dismiss", "alert");
+                closeButton.setAttribute("aria-label", "close");
+                closeButton.appendChild(closeButton);
+            };
+
         });
     </script>
 
