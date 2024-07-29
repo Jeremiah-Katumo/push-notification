@@ -66,6 +66,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+        const wsEndpoint = `${websocketProtocol}://${window.location.host}/ws/notifications/`;
+        const socket = new WebSocket(wsEndpoint);
+
+        // New event listener to capture incoming messages
+        socket.addEventListener("message", (event) => {
+            const messageData = JSON.parse(event.data);
+            console.log("Received notification:", messageData.message);
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
