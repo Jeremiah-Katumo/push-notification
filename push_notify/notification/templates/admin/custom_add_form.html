@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Send Notification</h2>
-    <form method="post" actions="{% url 'admin:Send-notification' %}">
+    <form method="post" actions="{% url 'admin:send_notification' %}">
         {% csrf_token %}
         {% for field in form %}
             <div class="form-group">
