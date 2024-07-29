@@ -1,0 +1,1 @@
+uvicorn push_notify.asgi:app --port 8000 --workers 4 --log-level debug --reload
