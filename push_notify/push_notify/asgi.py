@@ -1,5 +1,5 @@
 """
-ASGI config for push_notify project.
+ASGI(asynchronous serve gateway interface) config for push_notify project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
