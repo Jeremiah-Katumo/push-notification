@@ -16,5 +16,5 @@ services:
         - DEBUG=1
         - SECRET_KEY=082JDFS8848KHW38LF-233l0pkl
         - ALLOWED_HOSTS=localhost,127.0.0.1
-      depends_on:
-        - redis
+      # depends_on:
+      #   - redis
