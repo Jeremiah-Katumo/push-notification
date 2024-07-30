@@ -7,14 +7,13 @@ services:
       container_name: push_notification
       build: 
         context: ./push_notify
-      command: python3 manage.py runserver 0.0.0.0:8000
+      command: uvicorn push_notify.asgi:application --host 0.0.0.0 --port 8000 --workers 4 --log-level debug --reload
       volumes:
         - ./push_notify:/app/
       ports:
         - 8001:8000
-      environment:
-        - DEBUG=1
-        - SECRET_KEY=082JDFS8848KHW38LF-233l0pkl
-        - ALLOWED_HOSTS=localhost,127.0.0.1
-      # depends_on:
-      #   - redis
+      env_file:
+        - ./env_vars_django.txt
+      depends_on:
+        - redis
+      
