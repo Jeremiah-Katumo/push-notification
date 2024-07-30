@@ -8,7 +8,6 @@ from asgiref.sync import async_to_sync
 
 from . import models
 
-
 # Register your models here.
 class SendNotificationForm(forms.Form):
     message = forms.CharField(label="Notification message", max_length=200)
