@@ -44,7 +44,7 @@ services:
 
     celery:
       container_name: celery
-      build: 
+      build:
         context: ./push_notify
       command: celery --app=push_notify worker -l INFO -B
       volumes:
