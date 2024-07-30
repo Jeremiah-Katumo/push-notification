@@ -40,16 +40,15 @@ services:
         - 5555:5555
       environment:
         - BROKER_URL=amqp://guest:guest@rabbitmq:5672/
-      command: flower --port=5555 --broker=amqp://guest:guest@rabbitmq:5672/
+      # command: flower --port=5555 --broker=amqp://guest:guest@rabbitmq:5672/
 
     celery:
       container_name: celery
+      restart: always
       build:
         context: ./push_notify
       command: celery --app=push_notify worker -l INFO -B
       volumes:
         - ./push_notify:/app/
-      ports:
-        - 8001:8000
       env_file:
         - ./env_vars_django.txt
