@@ -7,6 +7,7 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 from . import models
+from . import tasks
 
 # Register your models here.
 class SendNotificationForm(forms.Form):
@@ -24,14 +25,16 @@ class NotificationAdmin(admin.ModelAdmin):
 
                 notification = models.Notification.objects.create(message=message)
 
-                channel_layer = get_channel_layer()
-                async_to_sync(channel_layer.group_send)(
-                    "notifications",
-                    {
-                        "type": "send_notification",
-                        "message": message,
-                    }
-                )
+                send_notification_task = tasks.send_notification.delay(message)
+                
+                # channel_layer = get_channel_layer()
+                # async_to_sync(channel_layer.group_send)(
+                #     "notifications",
+                #     {
+                #         "type": "send_notification",
+                #         "message": message,
+                #     }
+                # )
 
                 return HttpResponseRedirect("../{}/".format(notification.pk))
         else:
